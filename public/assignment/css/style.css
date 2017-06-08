@@ -1,7 +1,67 @@
+a:hover {
+    text-decoration: none;
+}
+
 input.form-control {
     margin-bottom: 5px;
 }
 
+.navbar-header {
+    width: 100%;
+}
+
+.navbar-inverse {
+    border-color: #9D9D9D;
+    background-color: #F8F8F8;
+    font-weight: bold;
+}
+
+.navbar-inverse .navbar-brand:hover {
+    color: black;
+}
+
+.navbar-inverse .navbar-link:hover {
+    color: black;
+}
+
 body {
-    padding-top: 36px;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.navbar-default {
+    background-color: #428BCA;
+}
+
+.navbar-default .navbar-brand {
+    color: white;
+    font-weight: bold;
+}
+
+.navbar-default .navbar-link {
+    color: white;
+    font-weight: bold;
+}
+
+.list-group-item {
+    border: none;
+}
+
+.wd-widget {
+    margin-bottom: 10px;
+}
+
+.wd-widget > img {
+    width: 100%;
+}
+
+.wd-widget > .wd-widget-toolbar {
+    position: absolute;
+    right: 15px;
+    background: white;
+    opacity: 0.9;
+    padding: 5px;
+    border-bottom-left-radius: 10px;
 }
