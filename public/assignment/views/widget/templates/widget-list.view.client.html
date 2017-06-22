@@ -1,0 +1,50 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#!user/{{model.userId}}/website/{{model.websiteId}}/page">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="navbar-brand">
+                Widget List
+            </a>
+            <p class="navbar-text pull-right">
+                <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/chooser" class="navbar-link">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+
+<div ng-repeat="widget in widgets">
+    <div ng-switch="widget.widgetType">
+        <div ng-switch-when="HEADING">
+            <ng-include src="'widget-heading.view.client.html'">
+        </div>
+        <div ng-switch-when="IMAGE">
+            <ng-include src="'widget-image.view.client.html'">
+        </div>
+        <div ng-switch-when="YOUTUBE">
+            <ng-include src="'widget-youtube.view.client.html'">
+        </div>
+    </div>
+</div>
+
+
+
+<nav class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                <span class="glyphicon glyphicon-play"></span>
+                &ensp;
+                <span class="glyphicon glyphicon-eye-open"></span>
+            </a>
+            <p class="navbar-text pull-right">
+                <a href="#!/user/{{model.userId}}" class="navbar-link">
+                    <span class="glyphicon glyphicon-user"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>

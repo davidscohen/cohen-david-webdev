@@ -1,0 +1,40 @@
+<div class="container-fluid">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text"
+               class="form-control"
+               id="name"
+               ng-model="model.widget.name">
+    </div>
+    <div class="form-group">
+        <label for="text">Text</label>
+        <input type="text"
+               class="form-control"
+               id="text"
+               ng-model="model.widget.text">
+    </div>
+    <div class="form-group">
+        <label for="url">URL</label>
+        <input type="url"
+               class="form-control"
+               id="url"
+               value="http://i.imgur.com/GQjUBlK.jpg"
+               ng-model="model.widget.url">
+    </div>
+    <div class="form-group">
+        <label for="width">Width</label>
+        <input type="text"
+               class="form-control"
+               id="width"
+               value="100%"
+               ng-model="model.widget.width">
+    </div>
+    <div class="form-group">
+        <label for="upload">Upload</label>
+        <input type="file" class="form-control" id="upload">
+    </div>
+    <a class="btn btn-primary btn-block"
+       href="#">Upload Image</a>
+    <a class="btn btn-danger btn-block"
+       ng-click="model.deleteWidget(model.WidgetId)">Delete</a>
+</div>
