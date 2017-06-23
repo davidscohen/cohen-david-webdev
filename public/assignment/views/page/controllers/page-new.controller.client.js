@@ -12,9 +12,19 @@
         model.websiteId = $routeParams['websiteId'];
         model.createPage = createPage;
 
-        function createPage(websiteId, page) {
-            pageService.createPage(websiteId, page);
+        function createPage(page){
+            page.websiteId = model.websiteId;
+            pageService.createPage(page);
             $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page');
+        };
+
+
+        function init() {
+
+            model.pages = pageService.findPageByWebsiteId(model.websiteId);
+
         }
+
+        init();
     }
 })();

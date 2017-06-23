@@ -14,18 +14,18 @@
         model.updateWebsite = updateWebsite;
 
         function init() {
-            model.websites = websiteService.findWebsitesByUser(model.userId);
+            model.websites = websiteService.findWebsiteByUser(model.userId);
             model.website = websiteService.findWebsiteById(model.websiteId);
         }
         init();
 
         function deleteWebsite(websiteId) {
-            websiteService.deleteWebsite(websiteId);
+            websiteService.deleteWebsite(model.websiteId);
             $location.url('/user/'+model.userId+'/website');
         }
 
-        function updateWebsite(websiteId,website){
-            websiteService.updateWebsite(websiteId,website);
+        function updateWebsite(website){
+            websiteService.updateWebsite(website);
             $location.url('/user/'+model.userId+'/website');
         }
     }

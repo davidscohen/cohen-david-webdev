@@ -5,12 +5,6 @@
 
     function websiteService() {
 
-        this.findWebsitesByUser = findWebsitesByUser;
-        this.findWebsiteById = findWebsiteById;
-        this.deleteWebsite = deleteWebsite;
-        this.createWebsite = createWebsite;
-        this.updateWebsite = updateWebsite;
-
         var websites = [
             { "_id": "123", "name": "Facebook",    "developerId": "456", "description": "Lorem" },
             { "_id": "234", "name": "Tweeter",     "developerId": "456", "description": "Lorem" },
@@ -21,9 +15,19 @@
             { "_id": "789", "name": "Chess",       "developerId": "234", "description": "Lorem" }
         ];
 
-        function createWebsite(userId, website) {
+        var api = {
+            findWebsiteById: findWebsiteById,
+            createWebsite: createWebsite,
+            updateWebsite: updateWebsite,
+            deleteWebsite: deleteWebsite,
+            findWebsiteByUser: findWebsiteByUser
+
+        };
+
+        return api;
+
+        function createWebsite(website) {
             website._id = (new Date()).getTime() + "";
-            website.developerId = userId;
             websites.push(website);
         }
 
@@ -34,22 +38,21 @@
         }
 
         function findWebsiteById(websiteId) {
-            return websites.find(function (website) {
-                return website._id === websiteId;
-            });
-        }
-
-        function findWebsitesByUser(userId) {
-            var results = [];
-
             for(var v in websites) {
-                if(websites[v].developerId === userId) {
-                    websites[v].created = new Date();
-                    websites[v].accessed = new Date();
-                    results.push(websites[v]);
+                if (websites[v]._id === websiteId) {
+                    return websites[v];
                 }
             }
-            return results;
+        }
+
+        function findWebsiteByUser(userId) {
+            var result = [];
+            for (var v in websites) {
+                if (websites[v].developerId === userId) {
+                    result.push(websites[v]);
+                }
+            }
+            return result;
         }
 
         function updateWebsite(websiteId, website) {

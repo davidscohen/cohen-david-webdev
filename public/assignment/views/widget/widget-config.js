@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module("webAppMaker")
+        .module("WebAppMaker")
         .config(widgetConfiguration);
     function widgetConfiguration($routeProvider) {
         $routeProvider

@@ -9,14 +9,14 @@
 
         model.register = register;
 
-        function register(username, password, password2) {
+        function register(username, password, passwordVerify) {
 
             if(username === null || username === '' || typeof username === 'undefined') {
                 model.error = 'username is required';
                 return;
             }
 
-            if(password !== password2 || password === null || typeof password === 'undefined') {
+            if(password !== passwordVerify || password === null || typeof password === 'undefined') {
                 model.error = "passwords must match";
                 return;
             }

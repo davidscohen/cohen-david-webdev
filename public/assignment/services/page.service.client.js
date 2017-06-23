@@ -19,10 +19,11 @@
             deletePage: deletePage
         };
 
-        function createPage(websiteId, page) {
+        function createPage(page) {
             page._id = (new Date()).getTime() + "";
-            page.websiteId = websiteId;
             pages.push(page);
+            console.log(pages);
+
         }
 
         function findPageByWebsiteId(websiteId) {
