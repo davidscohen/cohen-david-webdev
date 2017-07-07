@@ -1,33 +1,31 @@
 <div class="container-fluid">
-    <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text"
-               class="form-control"
-               id="name"
-               ng-model="model.widget.name">
-    </div>
-    <div class="form-group">
-        <label for="text">Text</label>
-        <input type="text"
-               class="form-control"
-               id="text"
-               ng-model="model.widget.text">
-    </div>
-    <div class="form-group">
-        <label for="url">URL</label>
-        <input type="url"
-               class="form-control"
-               id="url"
-               value="https://www.youtu.be/uLWLashCXHE"
-               ng-model="model.widget.url">
-    </div>
-    <div class="form-group">
-        <label for="width">Width</label>
-        <input type="text"
-               class="form-control"
-               id="width"
-               ng-model="model.widget.width">
-    </div>
-    <a class="btn btn-danger btn-block"
-       ng-click="model.deleteWidget(model.widgetId)">Delete</a>
+
+    <label for="name">Name</label>
+    <input id="name"
+           placeholder="Name"
+           class="form-control"/>
+
+    <label for="text">Text</label>
+    <textarea id="text"
+              ng-model="model.editWidget.text"
+              rows="5"
+              placeholder="Text"
+              class="form-control"></textarea>
+
+    <label for="url">URL</label>
+    <input id="url"
+           ng-model="model.editWidget.url"
+           placeholder="URL (https://www.youtube.com/embed/______)"
+           class="form-control"/>
+
+
+    <label for="width">Width</label>
+    <input id="width"
+           ng-model="model.editWidget.width"
+           placeholder="Width (Pixels)"
+           class="form-control"/>
+
+
+    <a ng-click="model.deleteWidget(model.editWidget._id)" class="btn btn-block btn-danger">Delete</a>
+
 </div>

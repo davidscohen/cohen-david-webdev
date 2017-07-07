@@ -4,19 +4,35 @@
         .module("WebAppMaker")
         .controller('profileController', profileController);
 
-    function profileController($routeParams, userService ) {
+    function profileController($location, userService, $routeParams) {
 
         var model = this;
         var userId = $routeParams['userId'];
-
-        model.user = userService.findUserById(userId);
-
         model.updateUser = updateUser;
+        model.deleteUser = deleteUser;
 
-        function updateUser(user) {
-            userService.updateUser(userId,user)
+        userService
+            .findUserById(userId)
+            .then(renderUser);
+
+        function renderUser (user) {
+            model.user = user;
         }
 
-    }
+        function deleteUser(user) {
+            userService
+                .deleteUser(user._id)
+                .then(function () {
+                    $location.url('/login');
+                });
+        }
 
+        function updateUser(user) {
+            userService
+                .updateUser(user._id, user)
+                .then(function () {
+                    model.message = "User updated successfully";
+                });
+        }
+    }
 })();

@@ -1,40 +1,44 @@
 <div class="container-fluid">
-    <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text"
-               class="form-control"
-               id="name"
-               ng-model="model.widget.name">
-    </div>
-    <div class="form-group">
-        <label for="text">Text</label>
-        <input type="text"
-               class="form-control"
-               id="text"
-               ng-model="model.widget.text">
-    </div>
-    <div class="form-group">
-        <label for="url">URL</label>
-        <input type="url"
-               class="form-control"
-               id="url"
-               value="http://i.imgur.com/GQjUBlK.jpg"
-               ng-model="model.widget.url">
-    </div>
-    <div class="form-group">
-        <label for="width">Width</label>
-        <input type="text"
-               class="form-control"
-               id="width"
-               value="100%"
-               ng-model="model.widget.width">
-    </div>
-    <div class="form-group">
-        <label for="upload">Upload</label>
-        <input type="file" class="form-control" id="upload">
-    </div>
-    <a class="btn btn-primary btn-block"
-       href="#">Upload Image</a>
-    <a class="btn btn-danger btn-block"
-       ng-click="model.deleteWidget(model.WidgetId)">Delete</a>
+
+    <label for="name">Name</label>
+    <input id="name"
+           placeholder="Name"
+           class="form-control"/>
+
+    <label for="text">Text</label>
+    <textarea id="text"
+              ng-model="model.editWidget.text"
+              rows="5"
+              placeholder="Text"
+              class="form-control"></textarea>
+
+    <label for="url">URL</label>
+    <input id="url"
+           placeholder="URL"
+           ng-model="model.editWidget.url"
+           class="form-control"/>
+
+    <a class="btn btn-block btn-success" href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.editWidgetId}}/search">
+        Search
+    </a>
+
+    <label for="width">Width</label>
+    <input id="width"
+           ng-model="model.editWidget.width"
+           placeholder="Width (Pixels)"
+           class="form-control"/>
+
+    <form action="/api/upload"   method="post" enctype="multipart/form-data">
+        <input  name="myFile"  id="myfile"   type="file" class="form-control"/>
+        <input  name="width"     value="{{model.editWidget.width}}" style="display: none"/>
+        <input  name="userId"    value="{{model.userId}}"   style="display: none"/>
+        <input  name="websiteId" value="{{model.websiteId}}"   style="display: none"/>
+        <input  name="pageId"    value="{{model.pageId}}"   style="display: none"/>
+        <input  name="widgetId"  value="{{model.editWidgetId}}"   style="display: none"/>
+        <button type="submit"    class="btn btn-block btn-info">Upload Image</button>
+    </form>
+
+    <a ng-click="model.deleteWidget(model.editWidget._id)"
+       class="btn btn-block btn-danger">Delete</a>
+
 </div>

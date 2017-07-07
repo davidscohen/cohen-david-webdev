@@ -1,28 +1,37 @@
 (function () {
-    angular
-        .module('webAppMaker')
-        .controller('widgetNewController', widgetNewController);
+    angular.module('WebAppMaker')
+        .controller('widgetNewController',widgetNewController);
 
-    function widgetNewController($routeParams,
-                                 $location,
-                                 widgetService) {
+    function widgetNewController(widgetService,
+                                 $routeParams,
+                                 $location) {
         var model = this;
-        model.userId = $routeParams["userId"];
-        model.websiteId = $routeParams["websiteId"];
-        model.pageId = $routeParams["pageId"];
-        model.createWidget = createWidget;
-
-        init();
+        model.userId = $routeParams['userId'];
+        model.websiteId = $routeParams['websiteId'];
+        model.pageId = $routeParams['pageId'];
 
         function init() {
-            model.widget = {
-                widgetType: $routeParams["wgtType"].toUpperCase()
-            }
+            widgetService
+                .findAllWidgetsForPage(model.pageId)
+                .then(renderWidgets);
+        }
+        init();
+
+        function renderWidgets(widgets) {
+            model.widgets = widgets;
         }
 
-        function createWidget(pageId, widget) {
-            widgetService.createWidget(pageId, widget);
-            $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page/'+model.pageId+'/widget/');
+        model.createWidget = createWidget;
+
+        function createWidget(widgetType) {
+            var widget = {
+                widgetType:widgetType
+            };
+            widgetService
+                .createWidget(model.pageId,widget)
+                .then(function (widget) {
+                    $location.url('/user/' + model.userId + '/website/' + model.websiteId + '/page/' + model.pageId + '/widget/' + widget._id);
+                });
         }
     }
 })();

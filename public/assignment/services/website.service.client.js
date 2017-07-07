@@ -3,7 +3,7 @@
         .module('WebAppMaker')
         .service('websiteService', websiteService);
 
-    function websiteService() {
+    function websiteService($http) {
 
         var websites = [
             { "_id": "123", "name": "Facebook",    "developerId": "456", "description": "Lorem" },
@@ -20,47 +20,56 @@
             createWebsite: createWebsite,
             updateWebsite: updateWebsite,
             deleteWebsite: deleteWebsite,
-            findWebsiteByUser: findWebsiteByUser
+            findWebsitesByUser: findWebsitesByUser
 
         };
 
         return api;
 
-        function createWebsite(website) {
-            website._id = (new Date()).getTime() + "";
-            websites.push(website);
-        }
-
-        function deleteWebsite(websiteId) {
-            var website = findWebsiteById(websiteId);
-            var index = websites.indexOf(website);
-            websites.splice(index, 1);
-        }
-
         function findWebsiteById(websiteId) {
-            for(var v in websites) {
-                if (websites[v]._id === websiteId) {
-                    return websites[v];
-                }
-            }
+            var url = '/api/website/' + websiteId;
+            return $http.get(url)
+                .then(function (response) {
+                        return response.data;
+                    }
+                );
         }
 
-        function findWebsiteByUser(userId) {
-            var result = [];
-            for (var v in websites) {
-                if (websites[v].developerId === userId) {
-                    result.push(websites[v]);
-                }
-            }
-            return result;
+        function createWebsite(website, userId) {
+            var url = '/api/user/' + userId + '/website';
+            return $http.post(url, website)
+                .then(function (response) {
+                        return response.data;
+                    }
+                );
         }
 
         function updateWebsite(websiteId, website) {
-            for (var w in websites) {
-                if (websites[w]._id === websiteId) {
-                    websites[w] = website;
-                }
-            }
+            var url = '/api/website/' + websiteId;
+            return $http.put(url, website)
+                .then(function (response) {
+                        return response.data;
+                    }
+                );
+        }
+
+        function deleteWebsite(websiteId) {
+            var url = '/api/website/' + websiteId;
+            return $http.delete(url)
+                .then(function (response) {
+                        return response.data;
+                    }
+                );
+        }
+
+        function findWebsitesByUser(userId) {
+            var url = '/api/user/' + userId + '/website';
+            return $http.get(url)
+                .then(function (response) {
+                        return response.data;
+                    }
+                );
         }
     }
 })();
+

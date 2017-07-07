@@ -1,47 +1,59 @@
 (function () {
-    angular
-        .module('webAppMaker')
-        .controller('widgetEditController', widgetEditController);
+    angular.module('WebAppMaker')
+        .controller('widgetEditController',widgetEditController);
 
-    function widgetEditController($routeParams,
+    function widgetEditController(widgetService,
+                                  $routeParams,
                                   $location,
-                                  widgetService) {
+                                  $sce) {
         var model = this;
         model.userId = $routeParams['userId'];
         model.websiteId = $routeParams['websiteId'];
         model.pageId = $routeParams['pageId'];
-        model.WidgetId = $routeParams['widgetId'];
+        model.editWidgetId = $routeParams['widgetId'];
+
+        function init() {
+            widgetService
+                .findAllWidgetsForPage(model.pageId)
+                .then(function (widgets) {
+                    model.widgets = widgets;
+                });
+            widgetService
+                .findWidgetById(model.editWidgetId)
+                .then(renderWidget);
+        }
+
+        function renderWidget(widget) {
+            model.editWidget = widget;
+            model.editWidgetUrl = widgetUrl(model.editWidget);
+        }
+
+        init();
+
         model.updateWidget = updateWidget;
         model.deleteWidget = deleteWidget;
 
-        function init() {
-            model.widgets = widgetService.findWidgetsByPageId(model.pageId);
-            model.editWidget = widgetService.findWidgetById(model.WidgetId);
-            model.editWidgetUrl = widgetUrl(model.editWidget);
-
-        }
-        init();
-
-
-
-
-
         function widgetUrl(widget) {
-            var url = 'views/widget/editors/widget-'+widget.widgetType.toLowerCase()+'-edit.view.client.html';
+            var url = 'views/widget/editors/widget-' + widget.widgetType.toLowerCase() + '-edit.view.client.html';
             return url;
         }
 
+        function deleteWidget(widgetId) {
+            widgetService
+                .deleteWidget(widgetId)
+                .then(function () {
+                    $location.url('/user/' + model.userId + '/website/' + model.websiteId + '/page/' + model.pageId + '/widget');
+                });
+        }
 
         function updateWidget(widgetId,widget){
-            widgetService.updateWidget(widgetId,widget);
-            $location.url('/user/'+model.userId+'/website/'+model.websiteId + '/page/' + model.pageId + '/widget');
+            widgetService
+                .updateWidget(widgetId,widget)
+                .then(function () {
+                    $location.url('/user/' + model.userId + '/website/' + model.websiteId + '/page/' + model.pageId + '/widget');
+                });
         }
 
-        function deleteWidget(widgetId) {
-            widgetService.deleteWidget(widgetId);
-            $location.url('/user/'+model.userId+'/website/'+model.websiteId + '/page/' + model.pageId + '/widget');
 
-        }
     }
-
-})()
+})();

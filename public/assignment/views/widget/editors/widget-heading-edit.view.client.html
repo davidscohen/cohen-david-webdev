@@ -1,25 +1,29 @@
 <div class="container-fluid">
 
     <label for="name">Name</label>
-    <input class="form-control"
-           type="text"
-           id="name"
-           ng-model="model.widget.name">
+    <input id="name"
+           placeholder="Name"
+           class="form-control"/>
 
     <label for="text">Text</label>
-    <input class="form-control"
-           type="text"
-           id="text"
-           value="US Senate Reaches Compromise on Emergency"
-           ng-model="model.widget.text">
+    <textarea ng-model="model.editWidget.text"
+              id="text"
+              rows="5"
+              placeholder="Text"
+              class="form-control"></textarea>
 
     <label for="size">Size</label>
-    <input class="form-control"
-           type="text"
-           id="size"
-           value="3"
-           ng-model="model.widget.size">
+    <select ng-model="model.editWidget.size"
+            id="size"
+            class="form-control">
+        <option value="1">1 (X-Large)</option>
+        <option value="2">2 (Larger)</option>
+        <option value="3">3 (Large)</option>
+        <option value="4">4 (Medium)</option>
+        <option value="5">5 (Small)</option>
+        <option value="6">6 (Smallest)</option>
+    </select>
 
-    <a class="btn btn-danger btn-block"
-       ng-click="model.deleteWidget(model.WidgetId)">Delete</a>
+    <a ng-click="model.deleteWidget(model.editWidget._id)" class="btn btn-block btn-danger">Delete</a>
+
 </div>

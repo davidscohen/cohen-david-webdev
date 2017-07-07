@@ -21,7 +21,7 @@
                     Edit Website
                 </a>
                 <p class="navbar-text pull-right">
-                    <a ng-click="model.updateWebsite(model.website)" class="navbar-link">
+                    <a ng-click="model.updateWebsite(model.websiteId,model.website)" class="navbar-link">
           <span class="glyphicon glyphicon-ok">
           </span>
                     </a>
@@ -57,7 +57,7 @@
                       placeholder="Description"
                       class="form-control"></textarea>
 
-            <a ng-click="model.deleteWebsite()" class="btn btn-block btn-danger">Delete</a>
+            <a ng-click="model.deleteWebsite(model.websiteId)" class="btn btn-block btn-danger">Delete</a>
         </div>
     </div>
 

@@ -8,7 +8,7 @@
                 New Page
             </a>
             <p class="navbar-text pull-right">
-                <a ng-click="model.createPage(page)" class="navbar-link">
+                <a ng-click="model.createPage(page.name,page.description)" class="navbar-link">
           <span class="glyphicon glyphicon-ok">
           </span>
                 </a>
@@ -42,12 +42,12 @@
                    placeholder="Page Name"
                    id="name"/>
 
-            <label for="name">Title</label>
+            <label for="title">Title</label>
             <input ng-model = "page.description"
                    class="form-control"
                    type="text"
                    placeholder="Page Title"
-                   id="name"/>
+                   id="title"/>
 
         </div>
     </div>

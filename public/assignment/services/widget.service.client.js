@@ -3,7 +3,14 @@
         .module('WebAppMaker')
         .service('widgetService', widgetService);
 
-    function widgetService() {
+    function widgetService($http) {
+        this.createWidget = createWidget;
+        this.deleteWidget = deleteWidget;
+        this.orderWidgets = orderWidgets;
+        this.findWidgetById = findWidgetById;
+        this.updateWidget = updateWidget;
+        this.findAllWidgetsForPage = findAllWidgetsForPage;
+        this.updateFlickr = updateFlickr;
 
         var widgets = [
             { "_id": "123", "widgetType": "HEADING", "pageId": "321", "size": 2, "text": "GIZMODO"},
@@ -17,52 +24,59 @@
             { "_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"}
         ];
 
-        var api = {
-            findWidgetById: findWidgetById,
-            createWidget: createWidget,
-            updateWidget: updateWidget,
-            deleteWidget: deleteWidget,
-            findWidgetsByPageId: findWidgetsByPageId
-
-        };
-
-        return api;
-
-
-        function findWidgetById(widgetId) {
-            for(var w in widgets) {
-                if (widgets[w]._id === widgetId) {
-                    return widgets[w];
-                }
-            }
-        }
-
-        function createWidget(widget) {
-            widget._id = (new Date()).getTime() + "";
-            widgets.push(widget);
-        }
-
-
-        function updateWidget(widget) {
-            var old = findWidgetById(widget._id);
-            var w = widgets.indexOf(old);
-            widgets[w] = widget;
+        function createWidget(pageId,widget) {
+            var url = '/api/page/' + pageId + '/widget';
+            return $http.post(url,widget)
+                .then(function (response) {
+                    return response.data;
+                })
         }
 
         function deleteWidget(widgetId) {
-            var widget = findWidgetById(widgetId);
-            var index = widgets.indexOf(widget);
-            widgets.splice(index, 1);
+            var url = '/api/widget/' + widgetId;
+            return $http.delete(url)
+                .then(function (response) {
+                    return response.data;
+                })
         }
 
-        function findWidgetsByPageId(pageId) {
-            var result = [];
-            for (var w in widgets) {
-                if (widgets[w].pageId === pageId) {
-                    result.push(widgets[w]);
-                }
-            }
-            return result;
+        function findWidgetById(widgetId) {
+            var url = '/api/widget/' + widgetId;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+        function updateWidget(widgetId,widget) {
+            var url = '/api/widget/' + widgetId;
+            return $http.put(url,widget)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
+        function findAllWidgetsForPage(pageId) {
+            var url = '/api/page/' + pageId + '/widget';
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+        function orderWidgets(pageId,index1,index2) {
+            var url = '/api/page/' + pageId + '/widget?initial=' + index1 + '&final=' + index2;
+            return $http.put(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
+        function updateFlickr(pageId,widgetId,urlObject) {
+            var url = '/api/flickr/' + pageId + '/' +widgetId;
+            return $http.put(url,urlObject)
+                .then(function (response) {
+                    return response.data;
+                })
         }
     }
 })();
+

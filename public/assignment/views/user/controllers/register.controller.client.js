@@ -12,26 +12,29 @@
         function register(username, password, passwordVerify) {
 
             if(username === null || username === '' || typeof username === 'undefined') {
-                model.error = 'username is required';
+                model.error = 'Username is required';
                 return;
             }
 
             if(password !== passwordVerify || password === null || typeof password === 'undefined') {
-                model.error = "passwords must match";
+                model.error = "Passwords must match";
                 return;
             }
 
             var found = userService.findUserByUsername(username);
 
             if(found !== null) {
-                model.error = "sorry, that username is taken";
+                model.error = "Username is not available";
             } else {
-                var newUser = {
+                var user = {
                     username: username,
                     password: password
                 };
-                newUser = userService.createUser(newUser);
-                $location.url('/user/' + newUser._id);
+                userService
+                    .createUser(user)
+                    .then(function (user) {
+                        $location.url('/user/' + user._id);
+                    });
             }
         }
     }
