@@ -48,35 +48,6 @@ body {
 .list-group-item {
     border: none;
 }
-
-.wd-widget {
-    margin-bottom: 10px;
+[hidden] {
+    display: none !important;
 }
-
-.wd-widget > img {
-    width: 100%;
-}
-
-.wd-widget > .wd-widget-toolbar {
-    position: absolute;
-    right: 15px;
-    background: white;
-    opacity: 0.9;
-    padding: 5px;
-    border-bottom-left-radius: 10px;
-    z-index: 1;
-}
-
-.youtube-widget {
-    position: relative;
-    padding-bottom: 56.25%; /* 16:9 */
-    height: 0;
-}
-.youtube-widget iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-

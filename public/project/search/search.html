@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    </body>
+    <script src="search.js"></script>
+    <meta charset="UTF-8">
+    <title>Imgur Upload</title>
+    <link data-require="bootstrap-css@3.3.7" data-semver="3.3.7" rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand">
+                Imgur Search
+            </a>
+        </div>
+    </div>
+</nav>
+
+<input id="search" type="text" />
+<button id="input">Search</button>
+
+
+<p id="message"></p>
+
+<div class="row">
+    <div class="col-xs-4" ng-repeat="img in model.data">
+        <img ng-click="model.selectPhoto(photo)"
+             ng-src="{{img.link}}"/>
+    </div>
+</div>
+
+</body>
+</html>

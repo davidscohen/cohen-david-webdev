@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    </body>
+    <script src="upload.js"></script>
+    <meta charset="UTF-8">
+    <title>Imgur Upload</title>
+    <link data-require="bootstrap-css@3.3.7" data-semver="3.3.7" rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand">
+                Imgur Upload
+            </a>
+        </div>
+    </div>
+</nav>
+<form id="imgur">
+    <label class="btn btn-default">Upload
+    <input hidden type="file" class="imgur" accept="image/*" />
+    </label>
+</form>
+
+<p id="message"></p>
+</body>
+</html>
