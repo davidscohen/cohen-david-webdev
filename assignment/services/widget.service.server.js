@@ -47,7 +47,7 @@ function uploadImage(req, res) {
             widgetModel
                 .updateWidget(widgetId, widget)
                 .then(function (status) {
-                    var callbackUrl   = "/assignment/#!/user/" + userId + "/website/" + websiteId + '/page/' + pageId +'/widget/' + widgetId;
+                    var callbackUrl   = "/assignment/#!/user/website/" + websiteId + '/page/' + pageId +'/widget/' + widgetId;
                     res.redirect(callbackUrl);
                 });
         });
