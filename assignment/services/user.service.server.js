@@ -6,8 +6,8 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var bcrypt = require("bcrypt-nodejs");
 
 var facebookConfig = {
-    clientID     : "FACEBOOK_CLIENT_ID",
-    clientSecret : "FACEBOOK_CLIENT_SECRET",
+    clientID     : process.env.FACEBOOK_CLIENT_ID,
+    clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
     profileFields: ['id', 'displayName', 'email','first_name','last_name']
 };
 
