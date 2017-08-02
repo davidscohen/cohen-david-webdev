@@ -3,12 +3,12 @@
         .module('WebAppMaker')
         .controller('websiteNewController', websiteNewController);
 
-    function websiteNewController($routeParams,
+    function websiteNewController(currentUser,$routeParams,
                                   $location,
                                   websiteService) {
         var model = this;
 
-        model.userId = $routeParams['userId'];
+        model.userId = currentUser._id;
         model.createWebsite = createWebsite;
 
         function init() {
@@ -23,10 +23,16 @@
         }
 
         function createWebsite(website) {
+            if (!website || !website.name || typeof website.name === 'undefined') {
+                model.error = "Name is required";
+                document.getElementById('name').style.borderColor = "red";
+                model.name = "Error";
+                return;
+            }
             websiteService
                 .createWebsite(website,model.userId)
                 .then(function () {
-                    $location.url('/user/'+model.userId+'/website');
+                    $location.url('/user/website');
                 });
         }
     }

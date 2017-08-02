@@ -1,21 +1,37 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
+            <a class="navbar-brand" href="#!/user/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
                 <span class="glyphicon glyphicon-chevron-left"></span>
             </a>
             <a class="navbar-brand">
-                Choose Widget
+                Create Widget
             </a>
         </div>
     </div>
 </nav>
 
 <div class="container-fluid">
+
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
+
+
+        <label for="name">Name</label>
+        <input ng-model = "name"
+               class="form-control"
+               type="text"
+               placeholder="Widget Name"
+               id="name"/>
+    <i><small>{{model.name}}</small></i><p></p>
+
+        <label>Type</label>
+
     <ul class="list-group">
 
         <li class="list-group-item">
-            <a ng-click="model.createWidget('HEADING')">Header</a>
+            <a ng-click="model.createWidget('HEADING',name)">Header</a>
         </li>
 
         <li class="list-group-item">
@@ -23,11 +39,11 @@
         </li>
 
         <li class="list-group-item">
-            <a ng-click="model.createWidget('HTML')">HTML</a>
+            <a ng-click="model.createWidget('HTML',name)">HTML</a>
         </li>
 
         <li class="list-group-item">
-            <a ng-click="model.createWidget('TEXT')">Text Input</a>
+            <a ng-click="model.createWidget('TEXT',name)">Text Input</a>
         </li>
 
         <li class="list-group-item">
@@ -39,11 +55,11 @@
         </li>
 
         <li class="list-group-item">
-            <a ng-click="model.createWidget('IMAGE')">Image</a>
+            <a ng-click="model.createWidget('IMAGE',name)">Image</a>
         </li>
 
         <li class="list-group-item">
-            <a ng-click=model.createWidget('YOUTUBE')>Youtube</a>
+            <a ng-click=model.createWidget('YOUTUBE',name)>Youtube</a>
         </li>
 
         <li class="list-group-item">
@@ -62,7 +78,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-right">
-                <a href="#!/user/{{model.userId}}" class="navbar-link">
+                <a href="#!/profile" class="navbar-link">
                     <span class="glyphicon glyphicon-user"></span>
                 </a>
             </p>

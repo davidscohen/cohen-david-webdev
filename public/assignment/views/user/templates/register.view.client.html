@@ -12,16 +12,19 @@
            ng-model="username"
            class="form-control"
            placeholder="username"/>
+    <i><small>{{model.usr}}</small></i><p></p>
     <input type="password"
            id="password"
            ng-model="password"
            class="form-control"
            placeholder="password"/>
+    <i><small>{{model.pwd}}</small></i><p></p>
     <input type="password"
            id="passwordVerify"
            ng-model="passwordVerify"
            class="form-control"
            placeholder="verify password"/>
+    <i><small>{{model.pwdv}}</small></i><p></p>
     <a class="btn btn-primary btn-block"
        ng-click="model.register(username, password, passwordVerify)">Register</a>
     <a class="btn btn-danger  btn-block"

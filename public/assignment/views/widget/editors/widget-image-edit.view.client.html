@@ -5,6 +5,7 @@
            ng-model="model.editWidget.name"
            placeholder="Name"
            class="form-control"/>
+    <i><small>{{model.name}}</small></i><p></p>
 
     <label for="text">Text</label>
     <textarea id="text"
@@ -19,7 +20,7 @@
            ng-model="model.editWidget.url"
            class="form-control"/>
 
-    <a class="btn btn-block btn-success" href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.editWidgetId}}/search">
+    <a class="btn btn-block btn-success" href="#!/user/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.editWidgetId}}/search">
         Search
     </a>
 

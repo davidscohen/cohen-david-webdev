@@ -3,7 +3,7 @@
         .module('WebAppMaker')
         .controller('flickrController',flickrController);
 
-    function flickrController(FlickrService,
+    function flickrController(currentUser,FlickrService,
                               widgetService,
                               $routeParams,
                               $location){
@@ -16,7 +16,7 @@
                 model.widgetId = $routeParams['widgetId'];
                 model.pageId = $routeParams['pageId'];
                 model.websiteId = $routeParams['websiteId'];
-                model.userId = $routeParams['userId'];
+                model.userId = currentUser._id;
             }
             init();
 
@@ -37,7 +37,7 @@
                 widgetService
                     .updateFlickr(model.pageId,model.widgetId,{'url':url})
                     .then(function () {
-                        $location.url('/user/'+model.userId + '/website/' + model.websiteId + '/page/' + model.pageId + '/widget/' + model.widgetId);
+                        $location.url('/user/website/' + model.websiteId + '/page/' + model.pageId + '/widget/' + model.widgetId);
                     })
 
             }

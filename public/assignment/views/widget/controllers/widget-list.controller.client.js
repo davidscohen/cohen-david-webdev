@@ -2,11 +2,11 @@
     angular.module('WebAppMaker')
         .controller('widgetListController',widgetListController);
 
-    function widgetListController(widgetService,
+    function widgetListController(currentUser,widgetService,
                                   $routeParams,
                                   $sce) {
         var model = this;
-        model.userId = $routeParams['userId'];
+        model.userId = currentUser._id;
         model.websiteId = $routeParams['websiteId'];
         model.pageId = $routeParams['pageId'];
 
@@ -18,6 +18,7 @@
         init();
 
         function renderWidgets(widgets) {
+
             model.widgets = widgets;
         }
 

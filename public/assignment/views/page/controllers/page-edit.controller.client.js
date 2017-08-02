@@ -3,11 +3,11 @@
         .module('WebAppMaker')
         .controller('pageEditController', pageEditController);
 
-    function pageEditController($routeParams,$location,
+    function pageEditController(currentUser,$routeParams,$location,
                                 pageService) {
         var model = this;
 
-        model.userId = $routeParams['userId'];
+        model.userId = currentUser._id;
         model.websiteId = $routeParams['websiteId'];
         model.pageId = $routeParams['pageId'];
         model.deletePage = deletePage;
@@ -32,13 +32,19 @@
 
             pageService.deletePage(pageId)
                 .then(function () {
-                    $location.url('/user/'+model.userId+'/website/' + model.websiteId + '/page');
+                    $location.url('/user/website/' + model.websiteId + '/page');
                 });
         }
         function updatePage(pageId,page){
+            if (!page || !page.name || typeof page.name === 'undefined' || page.name === null ||page.name ==="") {
+                model.error = "Name is required";
+                document.getElementById('name').style.borderColor = "red";
+                model.name = "Error";
+                return;
+            }
             pageService.updatePage(pageId,page)
                 .then(function () {
-                    $location.url('/user/'+model.userId+'/website/' + model.websiteId + '/page');
+                    $location.url('/user/website/' + model.websiteId + '/page');
                 });
         }
 

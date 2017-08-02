@@ -5,9 +5,10 @@
     function widgetEditController(widgetService,
                                   $routeParams,
                                   $location,
-                                  $sce) {
+                                  $sce,
+                                  currentUser) {
         var model = this;
-        model.userId = $routeParams['userId'];
+        model.userId = currentUser._id;
         model.websiteId = $routeParams['websiteId'];
         model.pageId = $routeParams['pageId'];
         model.editWidgetId = $routeParams['widgetId'];
@@ -42,15 +43,22 @@
             widgetService
                 .deleteWidget(widgetId)
                 .then(function () {
-                    $location.url('/user/' + model.userId + '/website/' + model.websiteId + '/page/' + model.pageId + '/widget');
+                    $location.url('/user/website/' + model.websiteId + '/page/' + model.pageId + '/widget');
                 });
         }
 
         function updateWidget(widgetId,widget){
+            if (!widget || !widget.name || typeof widget.name === 'undefined' || widget.name === null ||widget.name ==="") {
+                model.error = "Name is required";
+                document.getElementById('name').style.borderColor = "red";
+                model.name = "Error";
+
+                return;
+            }
             widgetService
                 .updateWidget(widgetId,widget)
                 .then(function () {
-                    $location.url('/user/' + model.userId + '/website/' + model.websiteId + '/page/' + model.pageId + '/widget');
+                    $location.url('/user/website/' + model.websiteId + '/page/' + model.pageId + '/widget');
                 });
         }
 

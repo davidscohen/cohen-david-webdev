@@ -3,12 +3,12 @@
         .module('WebAppMaker')
         .controller('websiteEditController', websiteEditController);
 
-    function websiteEditController($routeParams,
+    function websiteEditController(currentUser,$routeParams,
                                    $location,
                                    websiteService) {
         var model = this;
 
-        model.userId = $routeParams['userId'];
+        model.userId = currentUser._id;
         model.websiteId = $routeParams['websiteId'];
         model.deleteWebsite = deleteWebsite;
         model.updateWebsite = updateWebsite;
@@ -36,14 +36,20 @@
             websiteService
                 .deleteWebsite(websiteId)
                 .then(function () {
-                    $location.url('/user/'+model.userId+'/website');
+                    $location.url('/user/website');
                 });
         }
         function updateWebsite(websiteId,website){
+            if (!website || !website.name || typeof website.name === 'undefined' || website.name === null ||website.name ==="") {
+                model.error = "Name is required";
+                document.getElementById('name').style.borderColor = "red";
+                model.name = "Error";
+                return;
+            }
             websiteService
                 .updateWebsite(websiteId,website)
                 .then(function () {
-                    $location.url('/user/'+model.userId+'/website');
+                    $location.url('/user/website');
                 });
     }
 }})();
