@@ -1,0 +1,71 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#!/user/website/{{model.websiteId}}/page/">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="navbar-brand">
+                New Page
+            </a>
+            <p class="navbar-text pull-right">
+                <a ng-click="model.createPage(page.name,page.description)" class="navbar-link">
+          <span class="glyphicon glyphicon-ok">
+          </span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-4 hidden-xs">
+            <ul class="list-group">
+                <li ng-repeat="page in model.pages"
+                    class="list-group-item wd-li">
+                    <a href="#!/user/website/{{model.websiteId}}/page/{{page._id}}/widget">
+                        {{page.name}}
+                    </a>
+                    <a href="#!/user/website/{{model.websiteId}}/page/{{page._id}}">
+                        <span class="glyphicon glyphicon-cog pull-right"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-xs-12 col-sm-8">
+
+            <div ng-show="model.error" class="alert alert-danger">
+                {{model.error}}
+            </div>
+
+            <label for="name">Name</label>
+            <input ng-model = "page.name"
+                   class="form-control"
+                   type="text"
+                   placeholder="Page Name"
+                   id="name"/>
+            <i><small>{{model.name}}</small></i><p></p>
+
+            <label for="title">Title</label>
+            <input ng-model = "page.description"
+                   class="form-control"
+                   type="text"
+                   placeholder="Page Title"
+                   id="title"/>
+
+        </div>
+    </div>
+</div>
+
+<nav class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-right">
+                <a href="#!/profile" class="navbar-link">
+                    <span class="glyphicon glyphicon-user"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,42 @@
+<div class="container-fluid">
+
+    <label for="name">Name</label>
+    <input id="name"
+           ng-model="model.editWidget.name"
+           placeholder="Name"
+           class="form-control"/>
+    <i><small>{{model.name}}</small></i><p></p>
+
+    <label for="text">Text</label>
+    <textarea id="text"
+              ng-model="model.editWidget.text"
+              rows="5"
+              placeholder="Text"
+              class="form-control"></textarea>
+
+    <label for="url">URL</label>
+    <input id="url"
+           placeholder="URL"
+           ng-model="model.editWidget.url"
+           class="form-control"/>
+
+    <a class="btn btn-block btn-success" href="#!/user/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.editWidgetId}}/search">
+        Search
+    </a>
+
+    <label for="width">Width</label>
+    <input id="width"
+           ng-model="model.editWidget.width"
+           placeholder="Width (Pixels)"
+           class="form-control"/>
+
+    <input type="file" nv-file-select="" uploader="uploader">
+
+
+    <p id="message"></p>
+
+
+    <a ng-click="model.deleteWidget(model.editWidget._id)"
+       class="btn btn-block btn-danger">Delete</a>
+
+</div>
