@@ -30,7 +30,11 @@
            placeholder="Width (Pixels)"
            class="form-control"/>
 
-    <input type="file" nv-file-select="" uploader="uploader">
+    <form id="imgur">
+        <input ng-model="model.imgurUp" type="file" class="imgur" accept="image/*" />
+        <a ng-click="model.imgurUp(model.imgurUp)" class="btn btn-default">Upload
+        </a>
+    </form>
 
 
     <p id="message"></p>
