@@ -11,7 +11,7 @@ var googleConfig = {
 };
 
 if(process.env.MLAB_USERNAME_WEBDEV) {
-    googleConfig.callbackURL = "http://cohen-david-webdev.herokuapp.com/auth/facebook/callback"
+    googleConfig.callbackURL = "http://cohen-david-webdev.herokuapp.com/auth/google/callback"
 
 } else {
     googleConfig.callbackURL = "http://localhost:3000/auth/google/callback"
