@@ -47,104 +47,104 @@ app.get   ('/api/project/loggedin', loggedin);
 app.post  ('/api/project/logout', logout);
 app.post  ('/api/project/register', register);
 
-// passport.use(new GoogleStrategy(googleConfig, googleStrategy));
-// app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
-//
-// app.get('/auth/google/callback',
-//     passport.authenticate('google', {
-//         successRedirect: '/project/index.html#!/profile',
-//         failureRedirect: '/project/index.html#!/login'
-//     }));
-//
-// passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
-// app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
-//
-// app.get('/auth/facebook/callback',
-//     passport.authenticate('facebook', {
-//         successRedirect: '/project/index.html#!/profile',
-//         failureRedirect: '/project/index.html#!/login'
-//     }));
-//
-// function facebookStrategy(token, refreshToken, profile, done) {
-//     userModel
-//         .findUserByFacebookId(profile.id)
-//         .then(
-//             function(user) {
-//                 if(user) {
-//                     return done(null, user);
-//                 } else {
-//                     var newFacebookUser = {
-//                         firstName: profile.name.givenName,
-//                         lastName: profile.name.familyName,
-//                         username: profile.name.givenName + profile.name.familyName,
-//                         email: profile.emails[0].value,
-//                         facebook: {
-//                             id:    profile.id,
-//                             token: token
-//                         }
-//                     };
-//                     return userModel.createUser(newFacebookUser);
-//                 }
-//             },
-//             function(err) {
-//                 if (err) { return done(err); }
-//             }
-//         )
-//         .then(
-//             function(user){
-//                 return done(null, user);
-//             },
-//             function(err){
-//                 if (err) { return done(err); }
-//             }
-//         );
-//
-// }
-//
-//
-// var users = [
-//     {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
-//     {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley"  },
-//     {_id: "345", username: "charly",   password: "charly",   firstName: "Charly", lastName: "Garcia"  },
-//     {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
-// ];
-//
-// function googleStrategy(token, refreshToken, profile, done) {
-//     userModel
-//         .findUserByGoogleId(profile.id)
-//         .then(
-//             function(user) {
-//                 if(user) {
-//                     return done(null, user);
-//                 } else {
-//                     var email = profile.emails[0].value;
-//                     var emailParts = email.split("@");
-//                     var newGoogleUser = {
-//                         username:  emailParts[0],
-//                         firstName: profile.name.givenName,
-//                         lastName:  profile.name.familyName,
-//                         email:     email,
-//                         google: {
-//                             id:    profile.id,
-//                             token: token
-//                         }
-//                     };
-//                     return userModel.createUser(newGoogleUser);
-//                 }
-//             },
-//             function(err) {
-//                 if (err) { return done(err); }
-//             }
-//         )
-//         .then(
-//             function(user){
-//                 return done(null, user);
-//             },
-//             function(err){
-//                 if (err) { return done(err); }
-//             }
-//         );
-// }
+passport.use(new GoogleStrategy(googleConfig, googleStrategy));
+app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+
+app.get('/auth/google/callback',
+    passport.authenticate('google', {
+        successRedirect: '/project/index.html#!/profile',
+        failureRedirect: '/project/index.html#!/login'
+    }));
+
+passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+
+app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', {
+        successRedirect: '/project/index.html#!/profile',
+        failureRedirect: '/project/index.html#!/login'
+    }));
+
+function facebookStrategy(token, refreshToken, profile, done) {
+    userModel
+        .findUserByFacebookId(profile.id)
+        .then(
+            function(user) {
+                if(user) {
+                    return done(null, user);
+                } else {
+                    var newFacebookUser = {
+                        firstName: profile.name.givenName,
+                        lastName: profile.name.familyName,
+                        username: profile.name.givenName + profile.name.familyName,
+                        email: profile.emails[0].value,
+                        facebook: {
+                            id:    profile.id,
+                            token: token
+                        }
+                    };
+                    return userModel.createUser(newFacebookUser);
+                }
+            },
+            function(err) {
+                if (err) { return done(err); }
+            }
+        )
+        .then(
+            function(user){
+                return done(null, user);
+            },
+            function(err){
+                if (err) { return done(err); }
+            }
+        );
+
+}
+
+
+var users = [
+    {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
+    {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley"  },
+    {_id: "345", username: "charly",   password: "charly",   firstName: "Charly", lastName: "Garcia"  },
+    {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
+];
+
+function googleStrategy(token, refreshToken, profile, done) {
+    userModel
+        .findUserByGoogleId(profile.id)
+        .then(
+            function(user) {
+                if(user) {
+                    return done(null, user);
+                } else {
+                    var email = profile.emails[0].value;
+                    var emailParts = email.split("@");
+                    var newGoogleUser = {
+                        username:  emailParts[0],
+                        firstName: profile.name.givenName,
+                        lastName:  profile.name.familyName,
+                        email:     email,
+                        google: {
+                            id:    profile.id,
+                            token: token
+                        }
+                    };
+                    return userModel.createUser(newGoogleUser);
+                }
+            },
+            function(err) {
+                if (err) { return done(err); }
+            }
+        )
+        .then(
+            function(user){
+                return done(null, user);
+            },
+            function(err){
+                if (err) { return done(err); }
+            }
+        );
+}
 
 function register(req, res) {
     var userObj = req.body;
