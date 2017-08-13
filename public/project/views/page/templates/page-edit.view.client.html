@@ -29,7 +29,7 @@
                         {{page.name}}
                     </a>
                     <a href="#!/user/website/{{model.websiteId}}/page/{{page._id}}">
-                        <span class="glyphicon glyphicon-cog pull-right"></span>
+                        <span ng-show="model.userRole == 'Admin'"  class="glyphicon glyphicon-cog pull-right"></span>
                     </a>
                 </li>
             </ul>

@@ -9,6 +9,7 @@
                                pageService) {
         var model = this;
 
+        model.userRole = currentUser.role;
         model.userId = currentUser._id;
         model.websiteId = $routeParams['websiteId'];
         model.pageId = $routeParams['pageId'];

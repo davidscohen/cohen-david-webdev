@@ -6,6 +6,7 @@
                                  $routeParams,
                                  $location) {
         var model = this;
+        model.userRole = currentUser.role;
         model.userId = currentUser._id;
         model.userName = currentUser.username;
         model.websiteId = $routeParams['websiteId'];
