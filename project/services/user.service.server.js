@@ -5,31 +5,31 @@ var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var bcrypt = require("bcrypt-nodejs");
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-//
-// var facebookConfig = {
-//     clientID     : process.env.FACEBOOK_CLIENT_ID,
-//     clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
-//     profileFields: ['id', 'displayName', 'email','first_name','last_name']
-// };
-//
-// var googleConfig = {
-//     clientID     : process.env.GOOGLE_CLIENT_ID,
-//     clientSecret : process.env.GOOGLE_CLIENT_SECRET
-// };
-//
-// if(process.env.MLAB_USERNAME_WEBDEV) {
-//     facebookConfig.callbackURL = "http://cohen-david-webdev.herokuapp.com/auth/facebook/callback"
-//
-// } else {
-//     facebookConfig.callbackURL = "http://localhost:3000/auth/facebook/callback"
-// }
-//
-// if(process.env.MLAB_USERNAME_WEBDEV) {
-//     googleConfig.callbackURL = "http://cohen-david-webdev.herokuapp.com/auth/google/callback"
-//
-// } else {
-//     googleConfig.callbackURL = "http://localhost:3000/auth/google/callback"
-// }
+
+var facebookConfig = {
+    clientID     : process.env.FACEBOOK_CLIENT_ID,
+    clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
+    profileFields: ['id', 'displayName', 'email','first_name','last_name']
+};
+
+var googleConfig = {
+    clientID     : process.env.GOOGLE_CLIENT_ID,
+    clientSecret : process.env.GOOGLE_CLIENT_SECRET
+};
+
+if(process.env.MLAB_USERNAME_WEBDEV) {
+    facebookConfig.callbackURL = "http://cohen-david-webdev.herokuapp.com/auth/facebook/callback"
+
+} else {
+    facebookConfig.callbackURL = "http://localhost:3000/auth/facebook/callback"
+}
+
+if(process.env.MLAB_USERNAME_WEBDEV) {
+    googleConfig.callbackURL = "http://cohen-david-webdev.herokuapp.com/auth/google/callback"
+
+} else {
+    googleConfig.callbackURL = "http://localhost:3000/auth/google/callback"
+}
 
 passport.use(new LocalStrategy(localStrategy));
 passport.serializeUser(serializeUser);
