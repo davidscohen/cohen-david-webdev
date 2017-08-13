@@ -7,7 +7,7 @@
             <a class="navbar-brand">
                 Collaboration List
             </a>
-            <p class="navbar-text pull-right">
+            <p ng-hide="model.userRole == 'Writer'" class="navbar-text pull-right">
                 <a ng-hide="model.userRole == 'Guest'" href="#!/user/website/{{model.websiteId}}/page/new" class="navbar-link">
           <span class="glyphicon glyphicon-plus">
           </span>

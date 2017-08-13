@@ -32,10 +32,12 @@
                            href="#!/user/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </a>
-                        <a ng-show="model.userRole == 'Admin'"
-                           href="#!/user/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                        </a>
+                        <div ng-hide="widget.usr.valueOf() == model.userName.valueOf()">
+                            <a ng-show="model.userRole == 'Admin'"
+                               href="#!/user/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
