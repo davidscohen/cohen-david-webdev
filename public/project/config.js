@@ -4,26 +4,31 @@
         .config(Config);
     function Config($routeProvider) {
         $routeProvider
+
             .when("/login", {
                 templateUrl: "views/user/templates/login.view.client.html",
                 controller: "loginController",
                 controllerAs: "model"
             })
+
             .when("/", {
                 templateUrl: "views/user/templates/login.view.client.html",
                 controller: "loginController",
                 controllerAs: "model"
             })
+
             .when("default", {
                 templateUrl: "views/user/templates/login.view.client.html",
                 controller: "loginController",
                 controllerAs: "model"
             })
+
             .when("/register", {
                 templateUrl: "views/user/templates/register.view.client.html",
                 controller: "registerController",
                 controllerAs: "model"
             })
+
             .when("/profile", {
                 templateUrl: "views/user/templates/profile.view.client.html",
                 controller: "profileController",
@@ -32,6 +37,7 @@
                     currentUser: checkLoggedInProfileGuest
                 }
             })
+
             .when("/user/website", {
                 templateUrl: "views/website/templates/website-list.view.client.html",
                 controller: "websiteListController",
@@ -49,14 +55,16 @@
                     currentUser: checkLoggedIn
                 }
             })
+
             .when("/user/website/:websiteId", {
                 templateUrl: "views/website/templates/website-edit.view.client.html",
                 controller: "websiteEditController",
                 controllerAs: "model",
                 resolve: {
-                    currentUser: checkLoggedIn
+                    currentUser: checkAdmin
                 }
             })
+
             .when("/user/website/:websiteId/page", {
                 templateUrl: "views/page/templates/page-list.view.client.html",
                 controller: "pageListController",
@@ -74,15 +82,17 @@
                     currentUser: checkVisualArtist
                 }
             })
+
             .when("/user/website/:websiteId/page/:pageId", {
                 templateUrl: "views/page/templates/page-edit.view.client.html",
                 controller: "pageEditController",
                 controllerAs: "model",
                 resolve: {
-                    currentUser: checkVisualArtist
+                    currentUser: checkAdmin
                 }
             })
-            .when("/user/website/:websiteId/page/:pageId/widget",{
+
+            .when("/user/website/:websiteId/page/:pageId/widget", {
                 templateUrl: "views/widget/templates/widget-list.view.client.html",
                 controller: "widgetListController",
                 controllerAs: "model",
@@ -118,7 +128,6 @@
                 }
             })
 
-
             .when("/user/website/:websiteId/page/:pageId/widget/:widgetId",{
                 templateUrl: "views/widget/templates/widget-edit.view.client.html",
                 controller: "widgetEditController",
@@ -137,8 +146,17 @@
                 }
             })
 
+            .when('/admin/', {
+                templateUrl : "views/user/templates/admin.view.client.html",
+                controller: "adminController",
+                controllerAs: "model",
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })
 
     }
+
     function checkLoggedIn(userService, $q, $location) {
         var deferred = $q.defer();
 
@@ -288,7 +306,6 @@
 
         return deferred.promise;
     }
-
 
 })();
 

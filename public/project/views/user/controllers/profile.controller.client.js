@@ -12,6 +12,7 @@
         model.updateUser = updateUser;
         model.deleteUser = deleteUser;
         model.logout = logout;
+        model.userRole = currentUser.role;
 
         // userService
         //     .findUserById(userId)

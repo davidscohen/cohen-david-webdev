@@ -7,6 +7,7 @@
                                  $location) {
         var model = this;
         model.userId = currentUser._id;
+        model.userName = currentUser.username;
         model.websiteId = $routeParams['websiteId'];
         model.pageId = $routeParams['pageId'];
 
@@ -25,6 +26,7 @@
 
         function createWidget(widgetType,name) {
             var widget = {
+                usr: model.userName,
                 widgetType:widgetType,
                 name:name
             };

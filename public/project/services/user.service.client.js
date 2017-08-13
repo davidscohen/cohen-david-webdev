@@ -22,7 +22,8 @@
             loggedin: loggedin,
             register: register,
             updateUser: updateUser,
-            deleteUser: deleteUser
+            deleteUser: deleteUser,
+            findAllUsers: findAllUsers
         };
 
         return api;
@@ -109,5 +110,14 @@
                     return response.data;
                 });
         }
+
+        function findAllUsers() {
+            var url = "/api/project/users";
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
     }
 })();

@@ -21,7 +21,6 @@
     </div>
 </nav>
 <br>
-
 <div class="container-fluid">
     <div wbdv-sortable>
         <div ng-repeat="widget in model.widgets" class="wd-widget">
@@ -29,7 +28,11 @@
                 <div class="panel-body">
                     <div ng-include="model.widgetUrl(widget)"></div>
                     <div class="wd-widget-toolbar">
-                        <a ng-show="widget.usr == model.userName || model.userRole == 'Admin'"
+                        <a ng-hide="widget.usr.valueOf() !== model.userName.valueOf()"
+                           href="#!/user/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
+                        <a ng-show="model.userRole == 'Admin'"
                            href="#!/user/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </a>

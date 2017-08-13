@@ -1,0 +1,106 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#!/profile">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <a class="navbar-brand">
+                    User Modification Panel
+                </a>
+            </a>
+        </div>
+    </div>
+</nav>
+<br>
+
+<div class="container-fluid">
+
+    <ul class="list-group">
+
+        <li class="list-group-item active">
+            <div class="row">
+                <div class="col-xs-2">
+                    Username
+                </div>
+                <div class="col-xs-3">
+                    First Name
+                </div>
+                <div class="col-xs-3">
+                    Last Name
+                </div>
+                <div class="col-xs-3">
+                    Role
+                </div>
+                <div class="col-xs-1">
+                </div>
+            </div>
+        </li>
+
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-xs-2">
+                    <input ng-model="model.user.username" placeholder="Username" class="form-control"/>
+                </div>
+                <div class="col-xs-3">
+                    <input ng-model="model.user.firstName" placeholder="First Name" class="form-control"/>
+                </div>
+                <div class="col-xs-3">
+                    <input ng-model="model.user.lastName" placeholder="Last Name" class="form-control"/>
+                </div>
+                <div class="col-xs-3">
+                    <select required id="role"
+                            ng-model="model.user.role"
+                            class="form-control">
+                        <option value="" disabled selected>&#160;&#160;role</option>
+                        <option value="Visual Artist">Visual Artist</option>
+                        <option value="Writer">Writer</option>
+                        <option value="Guest">Guest</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+                </div>
+                <div class="col-xs-1">
+                    <span ng-click="model.updateUser(model.user);model.user={}" class="glyphicon glyphicon-ok pull-right"></span>
+                    <span class=" pull-right">&#160;&#160;&#160;</span>
+                    <span ng-click="model.createUser(model.user);model.user={}" class="glyphicon glyphicon-plus pull-right"></span>
+                </div>
+            </div>
+        </li>
+
+        <li ng-repeat="user in model.users" class="list-group-item">
+            <div class="row">
+                <div class="col-xs-2">
+                    {{user.username}}
+                </div>
+                <div class="col-xs-3">
+                    {{user.firstName}}
+                </div>
+                <div class="col-xs-3">
+                    {{user.lastName}}
+                </div>
+                <div class="col-xs-3">
+                    {{user.role}}
+                </div>
+                <div class="col-xs-1">
+                    <span ng-click="model.selectUser(user)" class="glyphicon glyphicon-pencil pull-right"></span>
+                    <span class=" pull-right">&#160;&#160;&#160;</span>
+                    <span ng-click="model.deleteUser(user)" class="glyphicon glyphicon-remove pull-right"></span>
+                </div>
+            </div>
+        </li>
+
+    </ul>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                <span class="glyphicon glyphicon-log-out"></span>
+            </a>
+            <p class="navbar-text pull-right">
+                <a href="#!/profile" class="navbar-link">
+                    <span class="glyphicon glyphicon-user"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>

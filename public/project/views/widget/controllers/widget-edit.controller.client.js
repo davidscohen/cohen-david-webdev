@@ -29,8 +29,7 @@
 
         function renderWidget(widget) {
             model.editWidget = widget;
-            model.editWidgetUrl = widgetUrl(model.editWidget);
-
+                model.editWidgetUrl = widgetUrl(model.editWidget);
         }
 
         init();
@@ -44,22 +43,19 @@
         }
 
         function deleteWidget(widgetId) {
-            widgetService
-                .deleteWidget(widgetId)
-                .then(function () {
-                    $location.url('/user/website/' + model.websiteId + '/page/' + model.pageId + '/widget');
-                });
+                widgetService
+                    .deleteWidget(widgetId)
+                    .then(function () {
+                        $location.url('/user/website/' + model.websiteId + '/page/' + model.pageId + '/widget');
+                    });
         }
 
         function updateWidget(widgetId,widget){
-            if (!widget || !widget.name || typeof widget.name === 'undefined' || widget.name === null ||widget.name ==="") {
+                if (!widget || !widget.name || typeof widget.name === 'undefined' || widget.name === null ||widget.name ==="") {
                 model.error = "Name is required";
                 document.getElementById('name').style.backgroundColor = "#FCEDEB";
                 model.name = "Error";
                 return;
-            }
-            if (model.userRole !== "Admin") {
-                widget.usr = model.userName;
             }
             widgetService
                 .updateWidget(widgetId,widget)
@@ -67,7 +63,5 @@
                     $location.url('/user/website/' + model.websiteId + '/page/' + model.pageId + '/widget');
                 });
         }
-
-
     }
 })();

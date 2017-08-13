@@ -59,13 +59,11 @@ function deleteWebsite(userId, websiteId, currentUserId) {
     return userModel
         .findById(userId)
         .then(function (user) {
-            if ( user._id === currentUserId ) {
-            var index = user.websites.indexOf(websiteId);
-            user.websites.splice(index, 1);
-            return user.save();
-        }
-        });
-
+                var index = user.websites.indexOf(websiteId);
+                user.websites.splice(index, 1);
+                return user.save();
+            }
+        );
 }
 
 function findAllUsers() {

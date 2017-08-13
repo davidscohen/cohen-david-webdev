@@ -32,9 +32,7 @@ function findWebsiteById(websiteId) {
 }
 
 function updateWebsite(websiteId, website,currentUserId) {
-    if (currentUserId === website._user) {
     return websiteModel.update({_id: websiteId}, {$set: website});
-}
 }
 
 function deleteWebsite(userId, websiteId, currentUserId) {

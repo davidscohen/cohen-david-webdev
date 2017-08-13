@@ -24,7 +24,7 @@
             <a href="#!/user/website/{{model.websiteId}}/page/{{page._id}}/widget">
                 {{page.name}}
             </a>
-            <a href="#!/user/website/{{model.websiteId}}/page/{{page._id}}">
+            <a ng-show="model.userRole == 'Admin'" href="#!/user/website/{{model.websiteId}}/page/{{page._id}}">
                 <span class="glyphicon glyphicon-cog pull-right"></span>
             </a>
             <br>{{page.description}}

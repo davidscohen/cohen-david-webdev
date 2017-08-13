@@ -41,6 +41,7 @@ app.post  ('/api/project/user', createUser);
 app.put   ('/api/project/user/:userId', updateUser);
 app.delete('/api/project/user/:userId', deleteUser);
 app.get ('/api/project/username',findUserByUsername);
+app.get ('/api/project/users', findAllUsers);
 
 app.post  ('/api/project/login', passport.authenticate('local'), login);
 app.get   ('/api/project/loggedin', loggedin);
@@ -144,6 +145,38 @@ function googleStrategy(token, refreshToken, profile, done) {
                 if (err) { return done(err); }
             }
         );
+}
+
+function findAllUsers(req, res) {
+    var username = req.query['username'];
+    var password = req.query['password'];
+    if(username && password) {
+        userModel
+            .findUserByCredentials(username, password)
+            .then(function (user) {
+                if(user) {
+                    res.json(user);
+                } else {
+                    res.status(404);
+                }
+            });
+    } else if (username) {
+        userModel
+            .findUserByUsername(username)
+            .then(function (user) {
+                if(user) {
+                    res.json(user);
+                } else {
+                    res.status(404);
+                }
+            });
+    } else {
+        userModel
+            .findAllUsers()
+            .then(function (users) {
+                res.json(users);
+            });
+    }
 }
 
 function register(req, res) {
