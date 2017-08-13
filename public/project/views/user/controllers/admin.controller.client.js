@@ -21,6 +21,10 @@
         }
 
         model.deleteUser = deleteUser;
+        model.createUser = createUser;
+        model.selectUser = selectUser;
+        model.updateUser = updateUser;
+
 
         function deleteUser(user) {
             userService
@@ -28,20 +32,16 @@
                 .then(findAllUsers);
         }
 
-        model.createUser = createUser;
         function createUser(user) {
             userService
                 .createUser(user)
                 .then(findAllUsers);
         }
 
-        model.selectUser = selectUser;
-
         function selectUser(user) {
             model.user = angular.copy(user);
         }
 
-        model.updateUser = updateUser;
         function updateUser(user) {
             userService
                 .updateUser(user._id, user)

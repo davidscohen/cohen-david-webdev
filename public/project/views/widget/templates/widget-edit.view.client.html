@@ -21,12 +21,7 @@
     {{model.error}}
 </div>
 
-<div ng-hide="widget.usr.valueOf() !== model.userName.valueOf()" ng-include="model.editWidgetUrl">
-</div>
-
-<div ng-hide="widget.usr.valueOf() == model.userName.valueOf()">
-<div ng-show="model.userRole == 'Admin'" ng-include="model.editWidgetUrl">
-</div>
+<div ng-include="model.editWidgetUrl">
 </div>
 
 <br>
