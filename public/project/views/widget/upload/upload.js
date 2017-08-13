@@ -30,6 +30,7 @@ $( document ).ready(function() {
                     "<br>URL : " + display.data.link  +
                     "<br>Width : " + display.data.width + " , Height : " + display.data.height +
                     "<br>Type : "  + display.data.type + "</br>";
+                parent.hello(display.data.link);
             });
 
     });

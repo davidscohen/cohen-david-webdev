@@ -2,20 +2,34 @@ var app = require('../../express');
 var userModel = require('../models/user/user.model.server');
 var passport      = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 var bcrypt = require("bcrypt-nodejs");
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-
-var googleConfig = {
-    clientID     : process.env.GOOGLE_CLIENT_ID,
-    clientSecret : process.env.GOOGLE_CLIENT_SECRET
-};
-
-if(process.env.MLAB_USERNAME_WEBDEV) {
-    googleConfig.callbackURL = "http://cohen-david-webdev.herokuapp.com/auth/google/callback"
-
-} else {
-    googleConfig.callbackURL = "http://localhost:3000/auth/google/callback"
-}
+//
+// var facebookConfig = {
+//     clientID     : process.env.FACEBOOK_CLIENT_ID,
+//     clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
+//     profileFields: ['id', 'displayName', 'email','first_name','last_name']
+// };
+//
+// var googleConfig = {
+//     clientID     : process.env.GOOGLE_CLIENT_ID,
+//     clientSecret : process.env.GOOGLE_CLIENT_SECRET
+// };
+//
+// if(process.env.MLAB_USERNAME_WEBDEV) {
+//     facebookConfig.callbackURL = "http://cohen-david-webdev.herokuapp.com/auth/facebook/callback"
+//
+// } else {
+//     facebookConfig.callbackURL = "http://localhost:3000/auth/facebook/callback"
+// }
+//
+// if(process.env.MLAB_USERNAME_WEBDEV) {
+//     googleConfig.callbackURL = "http://cohen-david-webdev.herokuapp.com/auth/google/callback"
+//
+// } else {
+//     googleConfig.callbackURL = "http://localhost:3000/auth/google/callback"
+// }
 
 passport.use(new LocalStrategy(localStrategy));
 passport.serializeUser(serializeUser);
@@ -33,58 +47,104 @@ app.get   ('/api/project/loggedin', loggedin);
 app.post  ('/api/project/logout', logout);
 app.post  ('/api/project/register', register);
 
-passport.use(new GoogleStrategy(googleConfig, googleStrategy));
-app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
-
-app.get('/auth/google/callback',
-    passport.authenticate('google', {
-        successRedirect: '/project/index.html#!/profile',
-        failureRedirect: '/project/index.html#!/login'
-    }));
-
-var users = [
-    {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
-    {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley"  },
-    {_id: "345", username: "charly",   password: "charly",   firstName: "Charly", lastName: "Garcia"  },
-    {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
-];
-
-function googleStrategy(token, refreshToken, profile, done) {
-    userModel
-        .findUserByGoogleId(profile.id)
-        .then(
-            function(user) {
-                if(user) {
-                    return done(null, user);
-                } else {
-                    var email = profile.emails[0].value;
-                    var emailParts = email.split("@");
-                    var newGoogleUser = {
-                        username:  emailParts[0],
-                        firstName: profile.name.givenName,
-                        lastName:  profile.name.familyName,
-                        email:     email,
-                        google: {
-                            id:    profile.id,
-                            token: token
-                        }
-                    };
-                    return userModel.createUser(newGoogleUser);
-                }
-            },
-            function(err) {
-                if (err) { return done(err); }
-            }
-        )
-        .then(
-            function(user){
-                return done(null, user);
-            },
-            function(err){
-                if (err) { return done(err); }
-            }
-        );
-}
+// passport.use(new GoogleStrategy(googleConfig, googleStrategy));
+// app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+//
+// app.get('/auth/google/callback',
+//     passport.authenticate('google', {
+//         successRedirect: '/project/index.html#!/profile',
+//         failureRedirect: '/project/index.html#!/login'
+//     }));
+//
+// passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+// app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+//
+// app.get('/auth/facebook/callback',
+//     passport.authenticate('facebook', {
+//         successRedirect: '/project/index.html#!/profile',
+//         failureRedirect: '/project/index.html#!/login'
+//     }));
+//
+// function facebookStrategy(token, refreshToken, profile, done) {
+//     userModel
+//         .findUserByFacebookId(profile.id)
+//         .then(
+//             function(user) {
+//                 if(user) {
+//                     return done(null, user);
+//                 } else {
+//                     var newFacebookUser = {
+//                         firstName: profile.name.givenName,
+//                         lastName: profile.name.familyName,
+//                         username: profile.name.givenName + profile.name.familyName,
+//                         email: profile.emails[0].value,
+//                         facebook: {
+//                             id:    profile.id,
+//                             token: token
+//                         }
+//                     };
+//                     return userModel.createUser(newFacebookUser);
+//                 }
+//             },
+//             function(err) {
+//                 if (err) { return done(err); }
+//             }
+//         )
+//         .then(
+//             function(user){
+//                 return done(null, user);
+//             },
+//             function(err){
+//                 if (err) { return done(err); }
+//             }
+//         );
+//
+// }
+//
+//
+// var users = [
+//     {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
+//     {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley"  },
+//     {_id: "345", username: "charly",   password: "charly",   firstName: "Charly", lastName: "Garcia"  },
+//     {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
+// ];
+//
+// function googleStrategy(token, refreshToken, profile, done) {
+//     userModel
+//         .findUserByGoogleId(profile.id)
+//         .then(
+//             function(user) {
+//                 if(user) {
+//                     return done(null, user);
+//                 } else {
+//                     var email = profile.emails[0].value;
+//                     var emailParts = email.split("@");
+//                     var newGoogleUser = {
+//                         username:  emailParts[0],
+//                         firstName: profile.name.givenName,
+//                         lastName:  profile.name.familyName,
+//                         email:     email,
+//                         google: {
+//                             id:    profile.id,
+//                             token: token
+//                         }
+//                     };
+//                     return userModel.createUser(newGoogleUser);
+//                 }
+//             },
+//             function(err) {
+//                 if (err) { return done(err); }
+//             }
+//         )
+//         .then(
+//             function(user){
+//                 return done(null, user);
+//             },
+//             function(err){
+//                 if (err) { return done(err); }
+//             }
+//         );
+// }
 
 function register(req, res) {
     var userObj = req.body;

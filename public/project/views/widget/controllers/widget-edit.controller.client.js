@@ -6,12 +6,15 @@
                                   $routeParams,
                                   $location,
                                   $sce,
-                                  currentUser) {
+                                  currentUser,$scope) {
         var model = this;
         model.userId = currentUser._id;
+        model.userName = currentUser.username;
+        model.userRole = currentUser.role;
         model.websiteId = $routeParams['websiteId'];
         model.pageId = $routeParams['pageId'];
         model.editWidgetId = $routeParams['widgetId'];
+
 
         function init() {
             widgetService
@@ -27,13 +30,13 @@
         function renderWidget(widget) {
             model.editWidget = widget;
             model.editWidgetUrl = widgetUrl(model.editWidget);
+
         }
 
         init();
 
         model.updateWidget = updateWidget;
         model.deleteWidget = deleteWidget;
-        model.imgurUpload = imgurUpload;
 
         function widgetUrl(widget) {
             var url = 'views/widget/editors/widget-' + widget.widgetType.toLowerCase() + '-edit.view.client.html';
@@ -51,10 +54,12 @@
         function updateWidget(widgetId,widget){
             if (!widget || !widget.name || typeof widget.name === 'undefined' || widget.name === null ||widget.name ==="") {
                 model.error = "Name is required";
-                document.getElementById('name').style.borderColor = "red";
+                document.getElementById('name').style.backgroundColor = "#FCEDEB";
                 model.name = "Error";
-
                 return;
+            }
+            if (model.userRole !== "Admin") {
+                widget.usr = model.userName;
             }
             widgetService
                 .updateWidget(widgetId,widget)
@@ -63,37 +68,6 @@
                 });
         }
 
- function imgurUpload(imgur){
-     var file = imgur.get(0).files;
 
-     var settings = {
-         async: false,
-         crossDomain: true,
-         processData: false,
-         contentType: false,
-         type: 'POST',
-         url: 'https://api.imgur.com/3/image',
-         headers: {
-             Authorization: 'Client-ID 52cdc8fa9b3f602',
-             Accept: 'application/json'
-         },
-         mimeType: 'multipart/form-data'
-     };
-
-     var formData = new FormData();
-     formData.append("image", file[0]);
-     settings.data = formData;
-
-     $.ajax(settings).done(function(response) {
-         console.log(response);
-         var display = JSON.parse(response);
-         var photo = display.data.link;
-         document.getElementById("message").innerHTML = "<br><img src='" + display.data.link + "'</span>" +
-             "<br>URL : " + display.data.link  +
-             "<br>Width : " + display.data.width + " , Height : " + display.data.height +
-             "<br>Type : "  + display.data.type + "</br>";
-     });
- }
     }
-
 })();

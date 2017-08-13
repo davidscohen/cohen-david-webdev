@@ -25,7 +25,7 @@
         function createWebsite(website) {
             if (!website || !website.name || typeof website.name === 'undefined') {
                 model.error = "Name is required";
-                document.getElementById('name').style.borderColor = "red";
+                document.getElementById('name').style.backgroundColor = "#FCEDEB";
                 model.name = "Error";
                 return;
             }

@@ -6,7 +6,7 @@
     function websiteListController(currentUser,$routeParams,
                                    websiteService) {
         var model = this;
-
+        model.userRole = currentUser.role;
         model.userId = currentUser._id;
 
         function init() {

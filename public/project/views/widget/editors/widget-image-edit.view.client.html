@@ -1,43 +1,27 @@
 <div class="container-fluid">
-
-    <label for="name">Name</label>
+    <label for="name">Enter Name</label>
     <input id="name"
            ng-model="model.editWidget.name"
            placeholder="Name"
            class="form-control"/>
     <i><small>{{model.name}}</small></i><p></p>
 
-    <label for="text">Text</label>
-    <textarea id="text"
-              ng-model="model.editWidget.text"
-              rows="5"
-              placeholder="Text"
-              class="form-control"></textarea>
+    <label>Imgur Upload</label><p></p>
 
-    <label for="url">URL</label>
-    <input id="url"
+    <iframe src="/project/views/widget/upload/upload.html" width="400" height="400" frameBorder="0"></iframe><p></p>
+
+
+    <label for="url">Enter Image URL</label>
+
+    <input name ="url"
+           id="url"
            placeholder="URL"
            ng-model="model.editWidget.url"
            class="form-control"/>
 
     <a class="btn btn-block btn-success" href="#!/user/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.editWidgetId}}/search">
-        Search
+        Flickr Search
     </a>
-
-    <label for="width">Width</label>
-    <input id="width"
-           ng-model="model.editWidget.width"
-           placeholder="Width (Pixels)"
-           class="form-control"/>
-
-    <form id="imgur">
-        <input ng-model="model.imgurUp" type="file" class="imgur" accept="image/*" />
-        <a ng-click="model.imgurUp(model.imgurUp)" class="btn btn-default">Upload
-        </a>
-    </form>
-
-
-    <p id="message"></p>
 
 
     <a ng-click="model.deleteWidget(model.editWidget._id)"

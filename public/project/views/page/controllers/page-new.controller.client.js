@@ -31,7 +31,7 @@
             };
             if (!page || !page.name || typeof page.name === 'undefined' || page.name === null ||page.name ==="") {
                 model.error = "Name is required";
-                document.getElementById('name').style.borderColor = "red";
+                document.getElementById('name').style.backgroundColor = "#FCEDEB";
                 model.name = "Error";
                 return;
             }

@@ -5,7 +5,7 @@
                 <span class="glyphicon glyphicon-chevron-left"></span>
             </a>
             <a class="navbar-brand">
-                Widget Edit
+                Submission Edit
             </a>
             <p class="navbar-text pull-right">
                 <a ng-click="model.updateWidget(model.editWidgetId,model.editWidget)" class="navbar-link">
@@ -16,6 +16,7 @@
         </div>
     </div>
 </nav>
+<br>
 
 <div ng-show="model.error" class="alert alert-danger">
     {{model.error}}
@@ -23,6 +24,8 @@
 
 <div ng-include="model.editWidgetUrl">
 </div>
+
+<br>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
@@ -32,7 +35,6 @@
                     <span class="glyphicon glyphicon-user"></span>
                 </a>
             </p>
-
         </div>
     </div>
 </nav>
@@ -41,9 +43,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">
-                <span class="glyphicon glyphicon-play"></span>
-                &ensp;
-                <span class="glyphicon glyphicon-eye-open"></span>
+                <span class="glyphicon glyphicon-log-out"></span>
             </a>
             <p class="navbar-text pull-right">
                 <a href="#!/profile" class="navbar-link">

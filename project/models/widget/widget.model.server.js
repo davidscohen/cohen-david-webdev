@@ -9,6 +9,7 @@ widgetModel.findWidgetById = findWidgetById;
 widgetModel.updateWidget = updateWidget;
 widgetModel.deleteWidget = deleteWidget;
 widgetModel.orderWidgets = orderWidgets;
+widgetModel.findAllWidgetsForUser = findAllWidgetsForUser;
 
 module.exports = widgetModel;
 
@@ -26,6 +27,10 @@ function findAllWidgetsForPage(pageId) {
         .findPageById(pageId)
         .populate('widgets')
         .exec();
+}
+
+function findAllWidgetsForUser(usr) {
+    return widgetModel.find({usr:usr})
 }
 
 function findWidgetById(widgetId) {

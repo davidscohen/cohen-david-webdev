@@ -1,35 +1,44 @@
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#!/profile">
+            <a class="navbar-brand" href="#!/user/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
                 <span class="glyphicon glyphicon-chevron-left"></span>
             </a>
             <a class="navbar-brand">
-                Groups
+                New Writing Submission
             </a>
-            <p class="navbar-text pull-right">
-                <a ng-hide="model.userRole == 'Guest'"  href="#!/user/website/new" class="navbar-link">
-          <span class="glyphicon glyphicon-plus">
-          </span>
-                </a>
-            </p>
         </div>
     </div>
 </nav>
-
 <br>
+
 <div class="container-fluid">
+
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
+
+        <label for="name">Enter Name</label>
+        <input ng-model = "name"
+               class="form-control"
+               type="text"
+               placeholder="Widget Name"
+               id="name"/>
+    <i><small>{{model.name}}</small></i><p></p>
+
+        <label>Create</label>
+
     <ul class="list-group">
-        <li class="list-group-item" ng-repeat="website in model.websites">
-            <a href="#!/user/website/{{website._id}}/page">{{website.name}}</a>
-            <a href="#!/user/website/{{website._id}}" class="glyphicon glyphicon-cog pull-right"></a>
-            <br>{{website.description}}
+
+        <li class="list-group-item">
+            <a ng-click="model.createWidget('HTML',name)">Write Response</a>
         </li>
+
     </ul>
 </div>
 <br>
 
-<nav class="navbar navbar-default navbar-fixed-bottom">
+<nav class="navbar navbar-inverse navbar-fixed-bottom">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">

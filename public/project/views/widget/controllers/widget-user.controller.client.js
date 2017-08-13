@@ -1,8 +1,8 @@
 (function () {
     angular.module('projectApp')
-        .controller('widgetListController',widgetListController);
+        .controller('widgetUserController',widgetUserController);
 
-    function widgetListController(currentUser,widgetService,
+    function widgetUserController(currentUser,widgetService,
                                   $routeParams,
                                   $sce) {
         var model = this;
@@ -10,11 +10,12 @@
         model.userName = currentUser.username;
         model.userRole = currentUser.role;
         model.websiteId = $routeParams['websiteId'];
+        model.user = $routeParams['usr'];
         model.pageId = $routeParams['pageId'];
 
         function init() {
             widgetService
-                .findAllWidgetsForPage(model.pageId)
+                .findAllWidgetsForUser(model.user)
                 .then(renderWidgets);
         }
         init();
@@ -32,6 +33,7 @@
             var url = 'views/widget/templates/widget-' + widget.widgetType.toLowerCase() + '.view.client.html';
             var d = new Date(widget.dateCreated);
             model.widgetDate = d.toString();
+            model.usr = widget.usr;
             return url;
         }
 

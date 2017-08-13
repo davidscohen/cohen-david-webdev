@@ -11,6 +11,7 @@
         this.updateWidget = updateWidget;
         this.findAllWidgetsForPage = findAllWidgetsForPage;
         this.updateFlickr = updateFlickr;
+        this.findAllWidgetsForUser = findAllWidgetsForUser;
 
         var widgets = [
             { "_id": "123", "widgetType": "HEADING", "pageId": "321", "size": 2, "text": "GIZMODO"},
@@ -47,6 +48,7 @@
                     return response.data;
                 })
         }
+
         function updateWidget(widgetId,widget) {
             var url = '/api/project/widget/' + widgetId;
             return $http.put(url,widget)
@@ -62,6 +64,7 @@
                     return response.data;
                 })
         }
+
         function orderWidgets(pageId,index1,index2) {
             var url = '/api/project/page/' + pageId + '/widget?initial=' + index1 + '&final=' + index2;
             return $http.put(url)
@@ -77,6 +80,14 @@
                     return response.data;
                 })
         }
+
+    function findAllWidgetsForUser(user) {
+        var url = '/api/project/userpage/' + user;
+        return $http.get(url)
+            .then(function (response) {
+                return response.data;
+            })
+    }
     }
 })();
 

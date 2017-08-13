@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="projectApp">
 <head>
+    <script src ="../vendor/custom/imgurPass.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <link data-require="bootstrap-css@3.3.7" data-semver="3.3.7" rel="stylesheet"
@@ -11,7 +12,7 @@
     <script src="directives/wbdv-sortable.js"></script>
     <script src="app.js"></script>
     <script src="config.js"></script>
-    <title>storyTeller (Project Home Page)</title>
+    <title>storyTeller</title>
     <script src="views/user/user-config.js"></script>
     <script src="views/website/website-config.js"></script>
     <script src="views/page/page-config.js"></script>
@@ -28,6 +29,7 @@
     <script src="views/widget/controllers/widget-list.controller.client.js"></script>
     <script src="views/widget/controllers/widget-edit.controller.client.js"></script>
     <script src="views/widget/controllers/widget-new.controller.client.js"></script>
+    <script src="views/widget/controllers/widget-user.controller.client.js"></script>
     <script src="views/widget/controllers/widget-flickr-search.controller.client.js"></script>
     <script src="services/user.service.client.js"></script>
     <script src="services/website.service.client.js"></script>
@@ -42,7 +44,10 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
-<div ng-view></div>
+
+    <div ng-view></div>
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>

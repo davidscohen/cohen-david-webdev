@@ -42,7 +42,7 @@
         function updateWebsite(websiteId,website){
             if (!website || !website.name || typeof website.name === 'undefined' || website.name === null ||website.name ==="") {
                 model.error = "Name is required";
-                document.getElementById('name').style.borderColor = "red";
+                document.getElementById('name').style.backgroundColor = "#FCEDEB";
                 model.name = "Error";
                 return;
             }

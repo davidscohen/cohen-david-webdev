@@ -12,7 +12,12 @@ var projectUserSchema = mongoose.Schema({
     google: {
         id:    String,
         token: String
-    }
+    },
+    facebook: {
+        id:    String,
+        token: String
+    },
+    role:{type:String ,enum:['Visual Artist', 'Writer', 'Admin', 'Guest'], default: 'Visual Artist'}
 }, {collection: "projectUser"});
 
 module.exports = projectUserSchema;

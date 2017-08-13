@@ -30,7 +30,7 @@
             };
             if (!widget || !widget.name || typeof widget.name === 'undefined' || widget.name === null ||widget.name ==="") {
                 model.error = "Name is required";
-                document.getElementById('name').style.borderColor = "red";
+                document.getElementById('name').style.backgroundColor = "#FCEDEB";
                 model.name = "Error";
                 return;
             }

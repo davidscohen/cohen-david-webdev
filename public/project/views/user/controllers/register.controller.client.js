@@ -8,11 +8,11 @@
         var model = this;
 
         model.register = register;
-
-        function register(username, password, passwordVerify) {
-            document.getElementById('username').style.borderColor = "";
-            document.getElementById('password').style.borderColor = "";
-            document.getElementById('passwordVerify').style.borderColor = "";
+        document.getElementById("role").selectedIndex = "1";
+        function register(username, password, passwordVerify, role) {
+            document.getElementById('username').style.backgroundColor = "";
+            document.getElementById('password').style.backgroundColor = "";
+            document.getElementById('passwordVerify').style.backgroundColor = "";
             model.usr = "";
             model.pwd = "";
             model.pwdv = "";
@@ -20,9 +20,9 @@
             if((username === null || username === '' || typeof username === 'undefined') &&
                 (!password || password !== passwordVerify || password === null || typeof password === 'undefined')) {
                 model.error = "Username and matching passwords required";
-                document.getElementById('username').style.borderColor = "red";
-                document.getElementById('password').style.borderColor = "red";
-                document.getElementById('passwordVerify').style.borderColor = "red";
+                document.getElementById('username').style.backgroundColor = "#FCEDEB";
+                document.getElementById('password').style.backgroundColor = "#FCEDEB";
+                document.getElementById('passwordVerify').style.backgroundColor = "#FCEDEB";
                 model.usr = "Error";
                 model.pwd = "Error";
                 model.pwdv = "Error";
@@ -31,17 +31,24 @@
 
             if(username === null || username === '' || typeof username === 'undefined') {
                 model.error = 'Username is required';
-                document.getElementById('username').style.borderColor = "red";
+                document.getElementById('username').style.backgroundColor = "#FCEDEB";
                 model.usr = "Error";
                 return;
             }
 
             if(!password || password !== passwordVerify || password === null || typeof password === 'undefined') {
                 model.error = "Passwords are required and must match";
-                document.getElementById('password').style.borderColor = "red";
-                document.getElementById('passwordVerify').style.borderColor = "red";
+                document.getElementById('password').style.backgroundColor = "#FCEDEB";
+                document.getElementById('passwordVerify').style.backgroundColor = "#FCEDEB";
                 model.pwd = "Error";
                 model.pwdv = "Error";
+                return;
+            }
+
+            if(!role || role === null || typeof role === 'undefined') {
+                model.error = "Role is required";
+                document.getElementById('role').style.backgroundColor = "#FCEDEB";
+                model.role = "Error";
                 return;
             }
 
@@ -54,7 +61,8 @@
                     function () {
                         var newUser = {
                             username: username,
-                            password: password
+                            password: password,
+                            role: role
                         };
                         return userService
                             .register(newUser)

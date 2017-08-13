@@ -3,13 +3,20 @@ var multer = require('multer'); // npm install multer --save
 var upload = multer({ dest: __dirname+'/../../public/project/uploads' });
 var widgetModel = require('../models/widget/widget.model.server');
 
+var imgur = require('imgur');
+imgur.setClientId('52cdc8fa9b3f602');
+imgur.getClientId();
+imgur.setAPIUrl('https://api.imgur.com/3/');
+imgur.getAPIUrl();
+
 
 app.get('/api/project/page/:pageId/widget',findAllWidgetsForPage);
+app.get('/api/project/userpage/:usr',findAllWidgetsForUser);
 app.post('/api/project/page/:pageId/widget',createWidget);
 app.delete('/api/project/widget/:widgetId',deleteWidget);
 app.put('/api/project/widget/:widgetId',updateWidget);
 app.get('/api/project/widget/:widgetId',findWidgetById);
-app.post ("/api/project/upload", upload.single('myFile'), uploadImage);
+app.post ("/api/project/upload", uploadImage);
 app.put("/api/project/page/:pageId/widget",orderWidgets);
 app.put('/api/project/flickr/:pageId/:widgetId',updateFlickr);
 
@@ -32,17 +39,22 @@ function uploadImage(req, res) {
     var userId = req.body.userId;
     var websiteId = req.body.websiteId;
     var pageId = req.body.pageId;
-    var originalname  = myFile.originalname; // file name on user's computer
-    var filename      = myFile.filename;     // new file name in upload folder
-    var path          = myFile.path;         // full path of uploaded file
-    var destination   = myFile.destination;  // folder where file is saved to
-    var size          = myFile.size;
-    var mimetype      = myFile.mimetype;
-
+    var filename;
+    imgur
+            .uploadFile("/Users/david/Desktop/tumblr_okh3grzsCB1uxd3t8o1_500.gif")
+            .then(function (json) {
+                console.log(json.data.link);
+                filename = json.data.link;
+                return(filename);
+            });
+setTimeout(function(){
+    console.log(filename);
     widgetModel
         .findWidgetById(widgetId)
         .then(function (widget) {
-            widget.url = '/project/uploads/' + filename;
+            widget.url = filename;
+            console.log(filename);
+
             widget.width = width;
             widgetModel
                 .updateWidget(widgetId, widget)
@@ -51,6 +63,7 @@ function uploadImage(req, res) {
                     res.redirect(callbackUrl);
                 });
         });
+}, 5000);
 }
 
 function updateFlickr(req,res) {
@@ -114,17 +127,13 @@ function updateWidget(req, res) {
         });
 }
 
-function findWidgetById(req,res) {
+function findWidgetById(req, res) {
     var widgetId = req.params['widgetId'];
     widgetModel
         .findWidgetById(widgetId)
         .then(function (widget) {
-            if(widget){
-                res.json(widget);
-            } else{
-                res.sendStatus(404);
-            }
-        });
+            res.status(200).json(widget);
+        })
 }
 
 function findAllWidgetsForPage(req, res) {
@@ -133,5 +142,14 @@ function findAllWidgetsForPage(req, res) {
         .findAllWidgetsForPage(pageId)
         .then(function (page) {
             res.status(200).json(page.widgets);
+        })
+}
+
+function findAllWidgetsForUser(req, res) {
+    var usr = req.params['usr'];
+    widgetModel
+        .findAllWidgetsForUser(usr)
+        .then(function (usr) {
+            res.status(200).json(usr);
         })
 }

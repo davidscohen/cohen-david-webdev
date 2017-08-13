@@ -5,11 +5,12 @@
                 <span class="glyphicon glyphicon-chevron-left"></span>
             </a>
             <a class="navbar-brand">
-                Create Widget
+                New Visual Submission
             </a>
         </div>
     </div>
 </nav>
+<br>
 
 <div class="container-fluid">
 
@@ -18,7 +19,7 @@
     </div>
 
 
-        <label for="name">Name</label>
+        <label for="name">Enter Name</label>
         <input ng-model = "name"
                class="form-control"
                type="text"
@@ -26,57 +27,24 @@
                id="name"/>
     <i><small>{{model.name}}</small></i><p></p>
 
-        <label>Type</label>
+        <label>Create</label>
 
     <ul class="list-group">
 
         <li class="list-group-item">
-            <a ng-click="model.createWidget('HEADING',name)">Header</a>
-        </li>
-
-        <li class="list-group-item">
-            <a href="#">Label</a>
-        </li>
-
-        <li class="list-group-item">
-            <a ng-click="model.createWidget('HTML',name)">HTML</a>
-        </li>
-
-        <li class="list-group-item">
-            <a ng-click="model.createWidget('TEXT',name)">Text Input</a>
-        </li>
-
-        <li class="list-group-item">
-            <a href="#">Link</a>
-        </li>
-
-        <li class="list-group-item">
-            <a href="#">Button</a>
-        </li>
-
-        <li class="list-group-item">
-            <a ng-click="model.createWidget('IMAGE',name)">Image</a>
-        </li>
-
-        <li class="list-group-item">
-            <a ng-click=model.createWidget('YOUTUBE',name)>Youtube</a>
-        </li>
-
-        <li class="list-group-item">
-            <a href="#">Data Table</a>
-        </li>
-
-        <li class="list-group-item">
-            <a href="#">Repeater</a>
+            <a ng-click="model.createWidget('IMAGE',name)">Select Image</a>
         </li>
 
     </ul>
 </div>
-
+<br>
 
 <nav class="navbar navbar-inverse navbar-fixed-bottom">
     <div class="container-fluid">
         <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                <span class="glyphicon glyphicon-log-out"></span>
+            </a>
             <p class="navbar-text pull-right">
                 <a href="#!/profile" class="navbar-link">
                     <span class="glyphicon glyphicon-user"></span>

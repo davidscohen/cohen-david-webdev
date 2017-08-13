@@ -5,10 +5,10 @@
                 <span class="glyphicon glyphicon-chevron-left"></span>
             </a>
             <a class="navbar-brand">
-                Pages
+                Collaboration List
             </a>
             <p class="navbar-text pull-right">
-                <a href="#!/user/website/{{model.websiteId}}/page/new" class="navbar-link">
+                <a ng-hide="model.userRole == 'Guest'" href="#!/user/website/{{model.websiteId}}/page/new" class="navbar-link">
           <span class="glyphicon glyphicon-plus">
           </span>
                 </a>
@@ -16,6 +16,7 @@
         </div>
     </div>
 </nav>
+<br>
 
 <div class="container-fluid">
     <ul class="list-group">
@@ -26,13 +27,18 @@
             <a href="#!/user/website/{{model.websiteId}}/page/{{page._id}}">
                 <span class="glyphicon glyphicon-cog pull-right"></span>
             </a>
+            <br>{{page.description}}
         </li>
     </ul>
 </div>
+<br>
 
 <nav class="navbar navbar-inverse navbar-fixed-bottom">
     <div class="container-fluid">
         <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                <span class="glyphicon glyphicon-log-out"></span>
+            </a>
             <p class="navbar-text pull-right">
                 <a href="#!/profile" class="navbar-link">
                     <span class="glyphicon glyphicon-user"></span>
