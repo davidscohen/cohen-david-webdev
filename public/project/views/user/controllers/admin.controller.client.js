@@ -10,6 +10,7 @@
         function init() {
             findAllUsers();
         }
+
         init();
 
         function findAllUsers() {
@@ -24,7 +25,6 @@
         model.createUser = createUser;
         model.selectUser = selectUser;
         model.updateUser = updateUser;
-
 
         function deleteUser(user) {
             userService
