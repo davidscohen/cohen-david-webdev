@@ -52,6 +52,7 @@
         }
 
         function updateWidget(widgetId,widget){
+            widget.backUrl = "#!/user/website/" + model.websiteId + "/page/" + model.pageId + "/widget";
                 if (!widget || !widget.name || typeof widget.name === 'undefined' || widget.name === null ||widget.name ==="") {
                 model.error = "Name is required";
                 document.getElementById('name').style.backgroundColor = "#FCEDEB";
